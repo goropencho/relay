@@ -4,9 +4,10 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/goropencho/relay/controller"
 )
 
-func Routes() *gin.Engine {
+func Routes(controller *controller.UserController) *gin.Engine {
 	service := gin.Default()
 
 	service.GET("", func(ctx *gin.Context) {
@@ -23,15 +24,15 @@ func Routes() *gin.Engine {
 	})
 
 	routes := service.Group("/api")
-	authRoutes := routes.Group("/auth")
-	authRoutes.POST("/signup", authController.SignUp)
-	authRoutes.POST("/login", authController.Login)
-	authRoutes.POST("/logout", authController.Logout)
+	// authRoutes := routes.Group("/auth")
+	// authRoutes.POST("/signup", authController.SignUp)
+	// authRoutes.POST("/login", authController.Login)
+	// authRoutes.POST("/logout", authController.Logout)
 	userRoutes := routes.Group("/user")
-	userRoutes.GET("", userController.Me)
-	userRoutes.PUT("", userController.UpdateProfile)
-	mailRoutes := routes.Group("/mail")
-	mailRoutes.POST("", mailController.SendMail)
+	userRoutes.GET("", controller.Me)
+	userRoutes.PUT("", controller.UpdateProfile)
+	// mailRoutes := routes.Group("/mail")
+	// mailRoutes.POST("", mailController.SendMail)
 
 	return service
 }
