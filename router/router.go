@@ -7,7 +7,7 @@ import (
 	"github.com/goropencho/relay/controller"
 )
 
-func Routes(controller *controller.UserController) *gin.Engine {
+func Routes() *gin.Engine {
 	service := gin.Default()
 
 	service.GET("", func(ctx *gin.Context) {
@@ -28,9 +28,10 @@ func Routes(controller *controller.UserController) *gin.Engine {
 	// authRoutes.POST("/signup", authController.SignUp)
 	// authRoutes.POST("/login", authController.Login)
 	// authRoutes.POST("/logout", authController.Logout)
+	user := controller.UserController{}
 	userRoutes := routes.Group("/user")
-	userRoutes.GET("", controller.Me)
-	userRoutes.PUT("", controller.UpdateProfile)
+	userRoutes.GET("", user.Me)
+	userRoutes.PUT("", user.UpdateProfile)
 	// mailRoutes := routes.Group("/mail")
 	// mailRoutes.POST("", mailController.SendMail)
 
