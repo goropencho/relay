@@ -5,7 +5,7 @@ import (
 	"net/smtp"
 )
 
-func SendMail(from string, to []string, message []byte) {
+func SendMail(to []string, message []byte) {
 	host := "app.debugmail.io"
 	port := 25
 	login := "43a09af1-77d2-40b4-a61d-40fc557c5a02"
